@@ -18,12 +18,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ZeroComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.primary) {
-                    Greeting("Android")
-                }
+                ZeroApp()
             }
         }
+    }
+}
+
+@Composable
+private fun ZeroApp() {
+    Surface(color = MaterialTheme.colors.primary) {
+        Greeting("Android")
     }
 }
 
@@ -36,6 +40,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ZeroComposeTheme {
-        Greeting("Android")
+        ZeroApp()
     }
 }
