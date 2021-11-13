@@ -118,8 +118,19 @@ private fun randomTint(): Float {
 @Composable
 fun TodoItemInput(onItemComplete: (TodoItem) -> Unit) {
     // onItemComplete is an event will fire when an item is completed by the user
-    val (text, setText) = remember {
+    val (text, setText) = rememberSaveable {
         mutableStateOf("")
+    }
+
+    val (icon, setIcon) = rememberSaveable {
+        mutableStateOf(TodoIcon.Default)
+    }
+    val iconsVisible = text.isNotBlank()
+
+    val submit = {
+        onItemComplete(TodoItem(text, icon))
+        setIcon(TodoIcon.Default)
+        setText("")
     }
 
     Column {
@@ -132,14 +143,27 @@ fun TodoItemInput(onItemComplete: (TodoItem) -> Unit) {
                 onTextChange = setText,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 8.dp)
+                    .padding(end = 8.dp),
+                onImeAction = submit
             )
             TodoEditButton(
-                onClick = { onItemComplete(TodoItem(text)) },
+                onClick = submit,
                 text = "Add",
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                enabled = text.isNotBlank()
             )
         }
+
+        if (iconsVisible) {
+            AnimatedIconRow(
+                icon = icon,
+                onIconChange = setIcon,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        } else {
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
     }
 }
 
