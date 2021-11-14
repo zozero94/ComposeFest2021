@@ -46,8 +46,12 @@ import kotlin.random.Random
 @Composable
 fun TodoScreen(
     items: List<TodoItem>,
+    currentlyEditing: TodoItem?,
     onAddItem: (TodoItem) -> Unit,
-    onRemoveItem: (TodoItem) -> Unit
+    onRemoveItem: (TodoItem) -> Unit,
+    onStartEdit: (TodoItem) -> Unit,
+    onEditItemChange: (TodoItem) -> Unit,
+    onEditDone: () -> Unit
 ) {
     Column {
 
@@ -59,12 +63,21 @@ fun TodoScreen(
             modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(top = 8.dp)
         ) {
-            items(items = items) {
-                TodoRow(
-                    todo = it,
-                    onItemClicked = { onRemoveItem(it) },
-                    modifier = Modifier.fillParentMaxWidth()
-                )
+            items(items) { todo ->
+                if (currentlyEditing?.id == todo.id) {
+                    TodoItemInlineEditor(
+                        item = currentlyEditing,
+                        onEditItemChange = onEditItemChange,
+                        onEditDone = onEditDone,
+                        onRemoveItem = { onRemoveItem(todo) }
+                    )
+                } else {
+                    TodoRow(
+                        todo,
+                        { onStartEdit(it) },
+                        Modifier.fillParentMaxWidth()
+                    )
+                }
             }
         }
 
@@ -146,9 +159,10 @@ fun TodoItemInput(
     submit: () -> Unit,
 ) {
     Column {
-        Row(Modifier
-            .padding(horizontal = 16.dp)
-            .padding(top = 16.dp)
+        Row(
+            Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp)
         ) {
             TodoInputText(
                 text = text,
@@ -179,6 +193,20 @@ fun TodoItemInput(
     }
 }
 
+@Composable
+fun TodoItemInlineEditor(
+    item: TodoItem,
+    onEditItemChange: (TodoItem) -> Unit,
+    onEditDone: () -> Unit,
+    onRemoveItem: () -> Unit
+) = TodoItemInput(
+    text = item.task,
+    onTextChange = { onEditItemChange(item.copy(task = it)) },
+    icon = item.icon,
+    onIconChange = { onEditItemChange(item.copy(icon = it)) },
+    submit = onEditDone,
+    iconsVisible = true
+)
 
 @Preview(showBackground = true)
 @Composable
@@ -189,7 +217,7 @@ fun PreviewTodoScreen() {
         TodoItem("Apply state", TodoIcon.Done),
         TodoItem("Build dynamic UIs", TodoIcon.Square)
     )
-    TodoScreen(items, {}, {})
+    TodoScreen(items, null, {}, {}, {}, {}, {})
 }
 
 @Preview(showBackground = true)
@@ -202,3 +230,4 @@ fun PreviewTodoRow() {
 @Preview
 @Composable
 fun PreviewTodoItemInput() = TodoItemEntryInput { }
+
