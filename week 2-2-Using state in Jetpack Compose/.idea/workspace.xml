@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0e2dbb00-2723-477c-8c89-2350fae29c44" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start/src/main/java/com/codelabs/state/todo/TodoScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/start/src/main/java/com/codelabs/state/todo/TodoScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start/src/main/java/com/codelabs/state/todo/TodoViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/start/src/main/java/com/codelabs/state/todo/TodoViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636798299286</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[Week-2] Extracting stateless composables">
+      <created>1636875816195</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1636875816195</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,6 +256,7 @@
     <MESSAGE value="[Week-2] Memory in Compose&#10;&#10;- 화면 회전시 rememberSavable 을 통해 유지한다." />
     <MESSAGE value="[Week-2] State in Compose" />
     <MESSAGE value="[Week-2] Dynamic UI based on state" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Week-2] Dynamic UI based on state" />
+    <MESSAGE value="[Week-2] Extracting stateless composables" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Week-2] Extracting stateless composables" />
   </component>
 </project>
