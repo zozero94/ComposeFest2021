@@ -499,7 +499,7 @@ private fun HomeTab(
  * Shows the weather.
  *
  * @param onRefresh Called when the refresh icon button is clicked.
- */
+ */animateContentSize
 @Composable
 private fun WeatherRow(
     onRefresh: () -> Unit
